@@ -1,0 +1,14 @@
+{
+  "name": "rio-project",
+  "version": "0.0.1",
+  "description": "might be the beginning of something bigger",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "vallenain",
+  "license": "ISC",
+  "dependencies": {
+    "masonry-layout": "^4.2.1"
+  }
+}
