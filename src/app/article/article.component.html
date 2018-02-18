@@ -1,0 +1,65 @@
+<article *ngIf="currentArticle">
+  <div class="author">
+      <div class="author-picture">
+          <img [src]="currentArticle.author.picture">
+      </div>
+      <div class="author-profile">
+          <div class="author-name">
+              {{ currentArticle.author.name }}
+          </div>
+          <div class="author-description">
+            {{ currentArticle.author.description }}
+          </div>
+      </div>
+  </div>
+  <div class="article-title">
+    <h1>
+      {{ currentArticle.title }}
+    </h1>
+    <button mat-icon-button *ngIf="canEdit()">
+      <mat-icon aria-label="Modifier">edit</mat-icon>
+    </button>
+  </div>
+  <div class="article-date">
+    {{ currentArticle.date | date : 'medium' }}
+  </div>
+  <div class="paragraphs">
+    <div class="text-paragraph paragraph"
+         [ngClass]="{'text-paragraph': paragraph.type === 'text',
+          'map-paragraph': paragraph.type === 'map',
+          'picture-paragraph': paragraph.type === 'picture'}"
+         *ngFor="let paragraph of currentArticle.paragraphs; first as isFirst; last as isLast">
+        <div class="edit" *ngIf="canEdit()">
+          <button mat-icon-button *ngIf="!isFirst">
+            <mat-icon aria-label="Descendre d'un cran">keyboard_arrow_up</mat-icon>
+          </button>
+          <button mat-icon-button *ngIf="!isLast">
+            <mat-icon aria-label="Descendre d'un cran">keyboard_arrow_down</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon aria-label="Modifier">edit</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon aria-label="Supprimer">delete</mat-icon>
+          </button>
+        </div>
+        <p *ngIf="paragraph.type === 'text'">
+          {{ paragraph.content.text }}
+        </p>
+
+        <div class="gmaps-instance" *ngIf="paragraph.type === 'map'">
+          <agm-map [latitude]="paragraph.content.center.lat" [longitude]="paragraph.content.center.lng"></agm-map>
+        </div>
+
+        <div class="picture-container" *ngIf="paragraph.type === 'picture'">
+          <img [src]="paragraph.content.src" />
+          <div class="captions">
+            <div *ngFor="let caption of paragraph.content.captions">
+              <mat-icon *ngIf="caption.isLocation">place</mat-icon>
+              <span class="caption-line">{{ caption.text }}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</article>
