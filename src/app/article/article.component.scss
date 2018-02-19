@@ -1,5 +1,9 @@
 $small-paragraph-width: 800px;
 
+.editable:hover {
+  background-color: rgba(37, 37, 37, 0.04);
+}
+
 .author {
     display: flex;
     box-align: center;
@@ -53,15 +57,16 @@ $small-paragraph-width: 800px;
   color: #797979;
   max-width: $small-paragraph-width;
   margin: auto;
+
+  span, button {
+    display: inline-block;
+    vertical-align: middle;
+  }
 }
 
 .paragraph {
     min-height: 3rem;
     margin: 2em auto;
-
-    &:hover {
-      background-color: rgba(37, 37, 37, 0.04);
-    }
 }
 
 .text-paragraph {

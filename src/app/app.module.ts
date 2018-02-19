@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { ArticleComponent } from './article/article.component';
 import { ArticleService } from './article/article.service';
+import { UserService } from './user/user.service';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ArticleService } from './article/article.service';
   ],
   providers: [
     MatIconRegistry,
-    ArticleService
+    ArticleService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

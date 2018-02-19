@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/of";
 
-import { Author } from './../user/author.service';
+import { User } from './../user/user.service';
 
 @Injectable()
 export class ArticleService {
@@ -53,6 +53,7 @@ export class ArticleService {
       }],
       author: {
         name: 'Val le nain',
+        email: 'vallenain@example.com',
         picture: 'http://s2.dmcdn.net/B4D0w/240x240-A66.jpg',
         description: 'Yet another nain (from Lyon)'
       },
@@ -64,7 +65,7 @@ export class ArticleService {
 export interface Article {
   title: string;
   paragraphs: Paragraph[],
-  author: Author;
+  author: User;
   date: Date;
 }
 

@@ -12,7 +12,7 @@
           </div>
       </div>
   </div>
-  <div class="article-title">
+  <div class="article-title" [ngClass]="{'editable': canEdit()}">
     <h1>
       {{ currentArticle.title }}
     </h1>
@@ -20,26 +20,30 @@
       <mat-icon aria-label="Modifier">edit</mat-icon>
     </button>
   </div>
-  <div class="article-date">
-    {{ currentArticle.date | date : 'medium' }}
+  <div class="article-date" [ngClass]="{'editable': canEdit()}">
+    <span>{{ currentArticle.date | date : 'medium' }}</span>
+    <button mat-icon-button *ngIf="canEdit()">
+      <mat-icon aria-label="Modifier">edit</mat-icon>
+    </button>
   </div>
   <div class="paragraphs">
     <div class="text-paragraph paragraph"
          [ngClass]="{'text-paragraph': paragraph.type === 'text',
           'map-paragraph': paragraph.type === 'map',
-          'picture-paragraph': paragraph.type === 'picture'}"
-         *ngFor="let paragraph of currentArticle.paragraphs; first as isFirst; last as isLast">
+          'picture-paragraph': paragraph.type === 'picture',
+          'editable': canEdit()}"
+         *ngFor="let paragraph of currentArticle.paragraphs; first as isFirst; last as isLast; index as idx">
         <div class="edit" *ngIf="canEdit()">
-          <button mat-icon-button *ngIf="!isFirst">
+          <button mat-icon-button *ngIf="!isFirst" (click)="moveParagaphUp(idx)">
             <mat-icon aria-label="Descendre d'un cran">keyboard_arrow_up</mat-icon>
           </button>
-          <button mat-icon-button *ngIf="!isLast">
+          <button mat-icon-button *ngIf="!isLast" (click)="moveParagaphDown(idx)">
             <mat-icon aria-label="Descendre d'un cran">keyboard_arrow_down</mat-icon>
           </button>
-          <button mat-icon-button>
+          <button mat-icon-button (click)="editParagraph(idx)">
             <mat-icon aria-label="Modifier">edit</mat-icon>
           </button>
-          <button mat-icon-button>
+          <button mat-icon-button (click)="deleteParagraph(idx)">
             <mat-icon aria-label="Supprimer">delete</mat-icon>
           </button>
         </div>
